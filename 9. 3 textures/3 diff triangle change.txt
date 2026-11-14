@@ -1,0 +1,43 @@
+// Triangle
+         -0.7f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f,0.0f, 0.0f,	// left  
+        0.0f, 0.0f, 0.0f,0.0f, 1.0f, 0.0f,1.0f, 0.0f,	// right 
+        0.4f, 0.7f, 0.0f, 0.0f, 1.0f, 0.0f,	1.0f, 1.0f,	// top 
+
+        -0.5f, -0.6f, 0.0f, 0.0f, 1.0f, 0.0f,0.0f, 0.0f,	// left  
+        0.4f, -0.6f, 0.0f, 0.0f, 1.0f, 0.0f,1.0f, 0.0f,	// right 
+        0.2f, 0.2f, 0.0f, 0.0f, 1.0f, 0.0f,	1.0f, 1.0f,	// top   
+
+        -0.5f, -0.6f, 0.0f, 0.0f, 1.0f, 0.0f,0.0f, 0.0f,	// left  
+        0.2f, -0.6f, 0.0f, 0.0f, 1.0f, 0.0f,1.0f, 0.0f,	// right 
+        0.2f, 0.5f, 0.0f, 0.0f, 1.0f, 0.0f,	1.0f, 1.0f,	// top
+
+//eikhane koyta triangle
+
+  for (unsigned int i = 0; i < 3; i++)
+        {
+            // calculate the model matrix for each object and pass it to shader before drawing
+            glm::mat4 model = glm::mat4(1.0f);
+            model = glm::scale(model, glm::vec3(1.0f));
+            model = glm::translate(model, cubePositions[i]);
+            float angle = 20.0f * i;
+
+            if(i == 0)
+            {
+            model = glm::rotate(model, glm::radians(angle), glm::vec3(1.0f, 0.3f, 0.5f));
+            glUniformMatrix4fv(glGetUniformLocation(shaderProgram, "model"), 1, GL_FALSE, &model[0][0]);
+            glDrawArrays(GL_TRIANGLES, 0, 3);
+            }
+
+            else if(i == 1)
+            {
+            model = glm::rotate(model, glm::radians(angle), glm::vec3(1.0f, 0.3f, 0.5f));
+            glUniformMatrix4fv(glGetUniformLocation(shaderProgram, "model"), 1, GL_FALSE, &model[0][0]);
+            glDrawArrays(GL_TRIANGLES, 3, 3);
+            }
+
+            else
+            {
+            model = glm::rotate(model, glm::radians(angle), glm::vec3(1.0f, 0.3f, 0.5f));
+            glUniformMatrix4fv(glGetUniformLocation(shaderProgram, "model"), 1, GL_FALSE, &model[0][0]);
+            glDrawArrays(GL_TRIANGLES, 6, 3);
+            }
